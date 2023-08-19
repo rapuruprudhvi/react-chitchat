@@ -4,7 +4,7 @@ import "./App.css";
 import NavBar from "./NavBar";
 import ChatBox from "./Chatbox";
 import Welcome from "./Welcome";
-import AddContact from "./AddContact";
+
 
 function App() {
   
@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <NavBar />
       {!user ? <Welcome /> : <ChatBox />}
-      <AddContact />
+      
     </div>
   );
 }
