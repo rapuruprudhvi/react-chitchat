@@ -1,10 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
+import { auth } from "./firebase";
 import {
   query,
   collection,
   orderBy,
   onSnapshot,
   limit,
+  addDoc,
+  serverTimestamp,
+  where,
+  getDocs,
 } from "firebase/firestore";
 import { db } from "./firebase";
 import Message from "./Message";
@@ -15,7 +20,26 @@ const ChatBox = () => {
   const [messages, setMessages] = useState([]);
   const scroll = useRef();
 
+  const syncLoggedInUserInfoWithUsersDb = () => {
+    const { uid, email } = auth.currentUser;
+    const userExistsQuery = query(
+      collection(db, "users"),
+      where("uid", "==", uid)
+    );
+    getDocs(userExistsQuery).then((userExistsSnapshot) => {
+      if (userExistsSnapshot.empty) {
+        addDoc(collection(db, "users"), {
+          uid: uid,
+          email: email,
+          createdAt: serverTimestamp(),
+        });
+      }
+    });
+  };
+
   useEffect(() => {
+    syncLoggedInUserInfoWithUsersDb();
+
     const q = query(
       collection(db, "messages"),
       orderBy("createdAt", "desc"),
@@ -41,7 +65,7 @@ const ChatBox = () => {
         {messages?.map((message) => (
           <Message key={message.id} message={message} />
         ))}
-        
+
       </div>
       {/* when a new message enters the chat, the screen scrolls down to the scroll div */}
       <span ref={scroll}></span>
