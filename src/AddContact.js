@@ -8,6 +8,8 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const AddContact = () => {
   const [name, setName] = useState("");
@@ -54,9 +56,9 @@ const AddContact = () => {
   };
 
   return (
-    <div>
+    <div >
       <form onSubmit={(event) => addContacts(event)} className="add-contacts">
-        <label>
+        <label >
           Name:
           <input
             type="text"
@@ -75,7 +77,7 @@ const AddContact = () => {
         </label>
         <br />
         <br />
-        <button type="submit">Add Contact</button>
+        <button type="submit" className="btn">Add Contact</button>
       </form>
       
       <div>
