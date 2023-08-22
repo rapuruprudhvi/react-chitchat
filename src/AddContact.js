@@ -58,7 +58,7 @@ const AddContact = () => {
   return (
     <div>
       <form onSubmit={(event) => addContacts(event)} className="add-contacts">
-        <label >
+        <label>
           Name:
           <input
             type="text"
