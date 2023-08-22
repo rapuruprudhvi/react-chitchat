@@ -8,7 +8,7 @@ import ChatBox from "./Chatbox.js";
 import Welcome from "./Welcome.js";
 
 
-function App() {
+const App=()=> {
   const [user] = useAuthState(auth);
 
   return (
@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={user ? <Layout /> : <Welcome/>} 
+          element={user ? <Layout /> : <Welcome />} 
         />
         
       </Routes>

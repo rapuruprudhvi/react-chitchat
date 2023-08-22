@@ -6,6 +6,8 @@ import ChatBox from "./Chatbox.js";
 import Welcome from "./Welcome.js";
 import AddContact from "./AddContact.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CreateGroup from "./Groups/CreateGroup.js";
+import UserGroups from "./Groups/UserGroups.js";
 
 const Layout = () => {
   // const [user] = useAuthState(auth);
@@ -16,6 +18,9 @@ const Layout = () => {
         
         <div className="col-3 ">
           <AddContact />
+          <CreateGroup />
+          <UserGroups />
+          
         </div>
 
         
