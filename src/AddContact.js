@@ -56,9 +56,9 @@ const AddContact = () => {
   };
 
   return (
-    <div >
+    <div>
       <form onSubmit={(event) => addContacts(event)} className="add-contacts">
-        <label >
+        <label>
           Name:
           <input
             type="text"
@@ -75,8 +75,8 @@ const AddContact = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <br />
-        <br />
+        <br/>
+        <br/>
         <button type="submit" className="btn">Add Contact</button>
       </form>
       
