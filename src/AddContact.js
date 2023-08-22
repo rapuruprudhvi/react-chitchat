@@ -77,7 +77,7 @@ const AddContact = () => {
         </label>
         <br/>
         <br/>
-        <button type="submit" className="btn">Add Contact</button>
+        <button type="submit" >Add Contact</button>
       </form>
       
       <div>
