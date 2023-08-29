@@ -18,7 +18,7 @@ import AddContact from "./AddContact";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
-  const scroll = useRef();
+  
 
   const syncLoggedInUserInfoWithUsersDb = () => {
     const { uid, email } = auth.currentUser;
@@ -68,8 +68,8 @@ const ChatBox = () => {
 
       </div>
       {/* when a new message enters the chat, the screen scrolls down to the scroll div */}
-      <span ref={scroll}></span>
-      <SendMessage scroll={scroll} />
+      
+      {/* <SendMessage /> */}
       {/* <AddContact /> */}
     </div>
   );
