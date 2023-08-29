@@ -6,32 +6,33 @@ import ChatBox from "./Chatbox.js";
 import Welcome from "./Welcome.js";
 import AddContact from "./AddContact.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SendMessage from "./SendMessage.js";
+// import Contacts from "./Contacts.js";
+import SideBar from "./components/Sidebar/Sidebar.js";
 
 const Layout = () => {
   // const [user] = useAuthState(auth);
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-3 p-0"> {/* Set padding to 0 */}
-          <div style={{ height: '100vh',display: 'flex', flexDirection: 'column', border: '1px solid #ccc', flex: 1, overflowY: 'scroll' }}>
-            <div className="row position-fixed">
-              <div className="col-2"></div>
-              <div className="col-10">
-                <AddContact />
-              </div>
-              {/* <div className="col-2"></div> */}
-            </div>
-          </div>
+    <div className="container-fluid position-fixed">
+      <div className="row ">
+        <div className="col-3  "> 
+          <SideBar></SideBar>
         </div>
 
-        <div className="col-9 p-0">
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', border: '1px solid #ccc' }}>
-            <div style={{ flex: 1, overflowY: 'scroll' }}>
-            <NavBar /> {/* Navigation bar at the top */}
+        <div className="col-9 p-0" >
+          <div className="row " style={{ backgroundColor: '#d1d7db',position: 'sticky',top:"0"}}>
+            <div className="col-12 " style={{borderLeft: '1px solid light'}}> <button> naveen</button></div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', height: '95vh' }}>
+            <div style={{ paddingLeft: '25px', flex: 1, overflowY: 'scroll' }}>
+              {/* <NavBar /> */}
               <ChatBox />
             </div>
-            
+           
+            <div className="row" style={{ backgroundColor: '#ccc',position: 'sticky',paddingTop:"10px",paddingBottom:"10px",top:"0"}} >
+              <SendMessage />
+            </div>
           </div>
         </div>
       </div>
@@ -40,8 +41,3 @@ const Layout = () => {
 };
 
 export default Layout;
-
-
-
-
-
