@@ -21,7 +21,7 @@ const Layout = () => {
         </div>
 
         <div className="col-9 p-0" >
-          <div className="row " style={{ backgroundColor: '#d1d7db',position: 'sticky',top:"0"}}>
+          <div className="row " style={{ backgroundColor: '#d1d7db',position: 'sticky',top:"0",paddingTop:"10px",paddingBottom:"10px"}}>
             <div className="col-12 " style={{borderLeft: '1px solid light'}}> <button> naveen</button></div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', height: '95vh' }}>

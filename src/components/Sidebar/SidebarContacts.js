@@ -38,7 +38,7 @@ const SidebarContacts = () => {
     <div>
       {showHome ? ( 
         <div>
-          <div className="row " style={{ backgroundColor: '#008069', position: 'sticky', top: "0", color: "white",paddingTop:"50",marginRight:"0px",paddingBottom:"10" }}>
+          <div className="row " style={{ backgroundColor: '#008069', position: 'sticky', top: "0", color: "white",paddingTop:"50px",marginRight:"0px",paddingBottom:"10px" }}>
              <div className="col-2">
               <button className="bi bi-arrow-left" onClick={toggleComponent}>back</button> {/* Bootstrap left arrow icon */}
              </div>
