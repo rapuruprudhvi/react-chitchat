@@ -10,6 +10,7 @@ import SendMessage from "./SendMessage.js";
 // import Contacts from "./Contacts.js";
 import SideBar from "./components/Sidebar/Sidebar.js";
 
+
 const Layout = () => {
   // const [user] = useAuthState(auth);
 
