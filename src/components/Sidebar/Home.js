@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import SidebarContacts from './SidebarContacts';
+import UserGroups from '../../Groups/UserGroups';
+
 
 const Home = () => {
   const [showHome, setShowHome] = useState(true);
@@ -28,6 +30,7 @@ const Home = () => {
               <div className="col-2"></div>
               <div className="col-10">
                 {/* Content of the Home component */}
+                <UserGroups></UserGroups>
               </div>
             </div>
           </div>

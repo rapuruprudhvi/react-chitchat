@@ -3,6 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./Home.js";
+import CreateGroup from "../../Groups/CreateGroup.js"
 
 const SidebarContacts = () => {
   const [contacts, setContacts] = useState([]);
@@ -45,6 +46,7 @@ const SidebarContacts = () => {
              <div className="col-10"> New Chat</div>
           </div>
           <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'scroll' }}>
+            <CreateGroup></CreateGroup>
             <h4>Your Contacts</h4>
             <span>
               {contacts.map((contact) => (

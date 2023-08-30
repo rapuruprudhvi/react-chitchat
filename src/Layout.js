@@ -6,8 +6,6 @@ import ChatBox from "./Chatbox.js";
 import Welcome from "./Welcome.js";
 import AddContact from "./AddContact.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CreateGroup from "./Groups/CreateGroup.js";
-import UserGroups from "./Groups/UserGroups.js";
 import SendMessage from "./SendMessage.js";
 // import Contacts from "./Contacts.js";
 import SideBar from "./components/Sidebar/Sidebar.js";
