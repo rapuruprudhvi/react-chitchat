@@ -14,7 +14,7 @@ const Home = () => {
       {showHome ? (
         <>
           {/* Left side bar buttons */}
-          <div className="row p-0 " style={{ backgroundColor: '#d1d7db', position: 'sticky',top: "0",borderRight:"5px"}}>
+          <div className="row " style={{ backgroundColor: '#d1d7db', position: 'sticky',top: "0", borderRight: '2px solid black',marginRight:"0px",paddingTop:"10px",paddingBottom:"10px"}}>
             <div className="col-6"></div>
             <div className="col-2"></div>
             <div className="col-2">
@@ -23,7 +23,7 @@ const Home = () => {
             <div className="col-2"> </div>
           </div>
 
-          <div className="row">
+          <div className="row"style={{marginRight:"0px"}}>
             <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'scroll' }}>
               <div className="col-2"></div>
               <div className="col-10">
