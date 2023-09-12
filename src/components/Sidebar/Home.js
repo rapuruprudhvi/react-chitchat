@@ -16,7 +16,7 @@ const Home = () => {
       {showHome ? (
         <>
           {/* Left side bar buttons */}
-          <div className="row " style={{ backgroundColor: '#d1d7db', position: 'sticky',top: "0", borderRight: '2px solid black',marginRight:"0px",paddingTop:"10px",paddingBottom:"10px"}}>
+          <div className="row " style={{ backgroundColor: '#d1d7db', position: 'sticky',top: "0", borderRight: '1px solid #ccc',marginRight:"0px",paddingTop:"10px",paddingBottom:"10px"}}>
             <div className="col-6"></div>
             <div className="col-2"></div>
             <div className="col-2">
