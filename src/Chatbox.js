@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "./firebase";
 import {
   query,
@@ -9,68 +9,70 @@ import {
   addDoc,
   serverTimestamp,
   where,
-  getDocs,
-} from "firebase/firestore";
+  getDocs, 
+} from "firebase/firestore"; // Make sure you have the correct path to "firebase/firestore"
 import { db } from "./firebase";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
-import AddContact from "./AddContact";
 
-const ChatBox = () => {
+const ChatBox = ({ selectedPersonId }) => {
   const [messages, setMessages] = useState([]);
-  
 
-  const syncLoggedInUserInfoWithUsersDb = () => {
+  // Sync user information with the database if necessary
+  const syncLoggedInUserInfoWithUsersDb = async () => {
     const { uid, email } = auth.currentUser;
     const userExistsQuery = query(
       collection(db, "users"),
       where("uid", "==", uid)
     );
-    getDocs(userExistsQuery).then((userExistsSnapshot) => {
-      if (userExistsSnapshot.empty) {
-        addDoc(collection(db, "users"), {
-          uid: uid,
-          email: email,
-          createdAt: serverTimestamp(),
-        });
-      }
-    });
+    const userExistsSnapshot = await getDocs(userExistsQuery);
+
+    if (userExistsSnapshot.empty) {
+      // Add the user to the "users" collection if not already present
+      await addDoc(collection(db, "users"), {
+        uid: uid,
+        email: email,
+        createdAt: serverTimestamp(),
+    
+      });
+    }
   };
 
   useEffect(() => {
+    // Ensure the user info is synchronized with the database
     syncLoggedInUserInfoWithUsersDb();
-
-    const q = query(
+    const selectedPersonId = '8ZbF03mHsaVru2NXiK53fiUMPf2';
+    // Create a query to fetch messages for the selected person
+    const messagesQuery = query(
       collection(db, "messages"),
-      orderBy("createdAt", "desc"),
+      where("receiverId", "==", selectedPersonId),
+      orderBy("createdAt", "asc"), // You can change the ordering as needed
       limit(50)
     );
 
-    const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
+    
+    const unsubscribe = onSnapshot(messagesQuery, (querySnapshot) => {
       const fetchedMessages = [];
-      QuerySnapshot.forEach((doc) => {
+      querySnapshot.forEach((doc) => {
         fetchedMessages.push({ ...doc.data(), id: doc.id });
       });
-      const sortedMessages = fetchedMessages.sort(
-        (a, b) => a.createdAt - b.createdAt
-      );
-      setMessages(sortedMessages);
+      setMessages(fetchedMessages);
     });
-    return () => unsubscribe;
-  }, []);
+
+    return () => {
+      
+      unsubscribe();
+    };
+  }, [selectedPersonId]); 
 
   return (
     <div className="chat-box">
       <div className="messages-wrapper">
-        {messages?.map((message) => (
+        {messages.map((message) => (
           <Message key={message.id} message={message} />
         ))}
-
       </div>
-      {/* when a new message enters the chat, the screen scrolls down to the scroll div */}
-      
-      {/* <SendMessage /> */}
-      {/* <AddContact /> */}
+      <SendMessage senderId={auth.currentUser.uid} receiverId={selectedPersonId} />
     </div>
   );
 };
