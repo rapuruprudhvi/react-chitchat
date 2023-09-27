@@ -13,10 +13,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AddContacts = () => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
   const [contacts, setContacts] = useState([]);
+
   const loadContacts = () => {
-    const contactsQuery = query(collection(db, "contacts"));
+    const contactsQuery = query(collection(db, "contacts"), where("ownerId", "==", auth.currentUser.uid));
     getDocs(contactsQuery)
       .then((contactsSnapshot) => {
         setContacts(contactsSnapshot.docs.map((doc) => doc.data()));
@@ -32,16 +33,26 @@ const AddContacts = () => {
 
     const { uid } = auth.currentUser;
 
-    const emailExistsQuery = query(collection(db, "contacts"), where("email", "==", email));
-    getDocs(emailExistsQuery)
-      .then((emailExistsSnapshot) => {
-        if (!emailExistsSnapshot.empty) {
-          alert("Email already exists!");
+    const userExistsQuery = query(collection(db, "users"), where("email", "==", contactEmail));
+    getDocs(userExistsQuery)
+    .then((userExistsSnapshot) => {
+      if (userExistsSnapshot.empty) {
+        alert("User with provided email does not exist!");
+        return;
+      }
+      const contactUid = userExistsSnapshot.docs[0].data().uid;
+
+      const contactExistsQuery = query(collection(db, "contacts"), where("ownerId", "==", uid), where("email", "==", contactEmail));
+      getDocs(contactExistsQuery)
+      .then((contactExistsSnapshot) => {
+        if (!contactExistsSnapshot.empty) {
+          alert("Contact already present with provided email!");
           return;
         }
 
         return addDoc(collection(db, "contacts"), {
-          email: email,
+          uid: contactUid,
+          email: contactEmail,
           name: name,
           createdAt: serverTimestamp(),
           ownerId: uid,
@@ -50,9 +61,10 @@ const AddContacts = () => {
       .then(() => {
         loadContacts();
         setName("");
-        setEmail("");
-      })
-      
+        setContactEmail("");
+      });
+    });
+
   };
 
   return (
@@ -71,14 +83,25 @@ const AddContacts = () => {
           Email:
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={contactEmail}
+            onChange={(e) => setContactEmail(e.target.value)}
           />
         </label>
         <br/>
         <br/>
         <button type="submit" >Add Contact</button>
       </form>
+
+      <div className="contacts">
+        <h2>Contacts</h2>
+        <ul>
+          {contacts.map((contact) => (
+            <li key={contact.email}>
+              {contact.name} ({contact.email})
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

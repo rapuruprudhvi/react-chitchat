@@ -16,8 +16,8 @@ const Layout = () => {
 
   return (
     <div className="container-fluid position-fixed">
-      <div className="row ">
-        <div className="col-3  "> 
+      <div className="row">
+        <div className="col-3">
           <SideBar></SideBar>
         </div>
 
