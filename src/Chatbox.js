@@ -22,7 +22,7 @@ const ChatBox = () => {
 
   // Sync user information with the database if necessary
   const syncLoggedInUserInfoWithUsersDb = async () => {
-    const userExistsQuery = query(collection(db, "users"), where("uid", "==", uid));
+    const userExistsQuery = query(collection(db, "users"), where("email", "==", email));
     const userExistsSnapshot = await getDocs(userExistsQuery);
 
     if (userExistsSnapshot.empty) {

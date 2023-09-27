@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
+import CreateGroup from "./CreateGroup.js"
 import {
     addDoc,
     collection,
@@ -33,13 +34,22 @@ const UserGroups = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Your Groups</h2>
-      <ul>
-        {userGroups.map((group) => (
-          <li key={group.id}>{group.name}</li>
-        ))}
-      </ul>
+    <div className="row"style={{marginRight:"0px"}}>
+      <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'scroll' }}>
+        <div className="col-2"></div>
+        <div className="col-10">
+          {/* Content of the Home component */}
+          <CreateGroup></CreateGroup>
+          <div>
+          <h2>Your Groups</h2>
+          <ul>
+            {userGroups.map((group) => (
+              <li key={group.id}>{group.name}</li>
+            ))}
+          </ul>
+        </div>
+        </div>
+      </div>
     </div>
   );
 }
