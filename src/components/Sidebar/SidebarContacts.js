@@ -3,7 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db, auth } from "../../firebase.js"; // Import the auth object
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./Home.js";
-import CreateGroup from "../../Groups/CreateGroup.js"
+
 import AddContacts from "./AddContacts.js";
 
 const SidebarContacts = () => {
@@ -12,31 +12,6 @@ const SidebarContacts = () => {
 
   // Get the signed-in user's ID
   const signedInUserId = auth.currentUser ? auth.currentUser.uid : null;
-
-  const fetchContacts = () => {
-    const contactsCollection = collection(db, "contacts");
-
-    getDocs(contactsCollection)
-      .then((querySnapshot) => {
-        const fetchedContacts = [];
-        querySnapshot.forEach((doc) => {
-          const contactData = doc.data();
-          // Check if the ownerId of the contact matches the signed-in user's ID
-          if (contactData.ownerId === signedInUserId) {
-            fetchedContacts.push(contactData);
-          }
-        });
-
-        setContacts(fetchedContacts);
-      })
-      .catch((error) => {
-        console.error("Error fetching contacts: ", error);
-      });
-  };
-
-  useEffect(() => {
-    fetchContacts();
-  }, [signedInUserId]); 
 
   // Function to toggle between SidebarContacts and Home
   const toggleComponent = () => {
@@ -54,23 +29,6 @@ const SidebarContacts = () => {
             <div className="col-10"> New Chat</div>
           </div>
           <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'scroll' }}>
-            <CreateGroup></CreateGroup>
-            <h4>Your Contacts</h4>
-            <span>
-              {contacts.map((contact) => (
-                <div className="row"
-                  style={{paddingTop: "10px",paddingBottom: "10px",borderTop: "1px solid #ccc",transition: "background-color 0.3s"}}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "#d1d7db";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "";
-                  }}
-                >
-                  <div className="col-12">{contact.name}</div>
-                </div>
-              ))}
-            </span>
             <AddContacts />
           </div>
         </div>
