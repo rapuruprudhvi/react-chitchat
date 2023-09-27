@@ -17,15 +17,24 @@ import SendMessage from "./SendMessage";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
+  const [newUserCreated, setNewUserCreated] = useState(false);
+  
   const { uid, email } = auth.currentUser;
+  console.log(auth.currentUser)
+  
+  // debugger
   const selectedPersonId = "4WbapkEtDbejNuNs6lL8PdMviEs1";
 
   // Sync user information with the database if necessary
   const syncLoggedInUserInfoWithUsersDb = async () => {
+    if(!email) {
+      return;
+    }
     const userExistsQuery = query(collection(db, "users"), where("email", "==", email));
     const userExistsSnapshot = await getDocs(userExistsQuery);
-
-    if (userExistsSnapshot.empty) {
+    
+    if (userExistsSnapshot.empty && !newUserCreated) {
+      setNewUserCreated(true)
       // Add the user to the "users" collection if not already present
       await addDoc(collection(db, "users"), {
         uid: uid,
@@ -35,30 +44,16 @@ const ChatBox = () => {
     }
   };
 
-  // Function to send a new message
-  const sendMessage = async (text) => {
-    try {
-      await addDoc(collection(db, "messages"), {
-        text: text,
-        senderId: auth.currentUser.uid,
-        receiverId: selectedPersonId,
-        createdAt: serverTimestamp(),
-      });
-      console.log("Message sent successfully!");
-    } catch (error) {
-      console.error("Error sending message: ", error);
-    }
-  };
-
   useEffect(() => {
     syncLoggedInUserInfoWithUsersDb();
 
-    // Create a single query to fetch messages for the selected person and the current user
+    // Create a query to fetch messages for either the current user or the selected person
     const messagesQuery = query(
       collection(db, "messages"),
       orderBy("createdAt", "asc"),
-      where("senderId", "in", [auth.currentUser.uid, selectedPersonId]),
       where("receiverId", "in", [auth.currentUser.uid, selectedPersonId]),
+      where("senderId", "in", [auth.currentUser.uid, selectedPersonId]),
+     
       limit(50)
     );
 
@@ -76,6 +71,21 @@ const ChatBox = () => {
       unsubscribe();
     };
   }, [selectedPersonId]);
+
+  // Function to send a new message
+  const sendMessage = async (text) => {
+    try {
+      await addDoc(collection(db, "messages"), {
+        text: text,
+        senderId: auth.currentUser.uid,
+        receiverId: selectedPersonId,
+        createdAt: serverTimestamp(),
+      });
+      console.log("Message sent successfully!");
+    } catch (error) {
+      console.error("Error sending message: ", error);
+    }
+  };
 
   return (
     <div className="chat-box">
