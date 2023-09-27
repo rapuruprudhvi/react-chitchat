@@ -22,10 +22,11 @@ const CreateGroup = () => {
         memberUids: [auth.currentUser.uid],
       });
 
-      console.log('Group created');
+      
+    }
+    console.log('Group created');
 
       setGroupName('');
-    }
   };
 
   return (

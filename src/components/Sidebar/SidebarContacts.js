@@ -36,7 +36,7 @@ const SidebarContacts = () => {
 
   useEffect(() => {
     fetchContacts();
-  }, [signedInUserId]); // Re-run the effect when the signed-in user changes
+  }, [signedInUserId]); 
 
   // Function to toggle between SidebarContacts and Home
   const toggleComponent = () => {
