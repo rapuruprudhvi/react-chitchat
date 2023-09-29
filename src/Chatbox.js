@@ -23,7 +23,7 @@ const ChatBox = () => {
   console.log(auth.currentUser)
   
   // debugger
-  const selectedPersonId = "4WbapkEtDbejNuNs6lL8PdMviEs1";
+  const selectedPersonId = "p1I0OfqO6WS0btyJSOqT3NasEWq2";
 
   // Sync user information with the database if necessary
   const syncLoggedInUserInfoWithUsersDb = async () => {
