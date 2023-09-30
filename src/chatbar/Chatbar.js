@@ -11,17 +11,7 @@ const Chatbar = () => {
 
           <div className="col-2 " ><NavBar></NavBar></div>
        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', height: '93vh' }}>
-          <div style={{ paddingLeft: '25px', flex: 1, overflowY: 'scroll' }}>
-              <ChatBox />
-           </div>
-        
-           
-           <div className="row" style={{ backgroundColor: '#ccc',position: 'sticky',paddingTop:"10px",paddingBottom:"10px",top:"0"}} >
-             <SendMessage />
-           </div>
-        </div>
+        <ChatBox />
     </div>
   );
 };
