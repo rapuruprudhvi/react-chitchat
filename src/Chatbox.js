@@ -89,12 +89,18 @@ const ChatBox = () => {
 
   return (
     <div className="chat-box">
-      <div className="messages-wrapper">
-        {messages.map((message) => (
-          <Message key={message.id} message={message} />
-        ))}
+      <div style={{ display: 'flex', flexDirection: 'column', height: '93vh' }}>
+        <div style={{ paddingLeft: '25px', flex: 1, overflowY: 'scroll' }}>
+          {messages.map((message) => (
+            <Message key={message.id} message={message} />
+           ))}
+        </div>
+        
+           
+        <div className="row" style={{ backgroundColor: '#ccc',position: 'sticky',paddingTop:"10px",paddingBottom:"10px",top:"0"}} >
+          <SendMessage sendMessage={sendMessage} />
+         </div>
       </div>
-      <SendMessage sendMessage={sendMessage} />
     </div>
   );
 };
