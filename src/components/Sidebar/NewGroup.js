@@ -8,8 +8,8 @@ function NewGroup() {
   const [contacts, setContacts] = useState([]);
   const [showSidebarContacts, setShowSidebarContacts] = useState(false);
   const [selectedNames, setSelectedNames] = useState([]);
+  const [selectedIds, setSelectedIds] = useState([]); 
   const [showGroupName, setShowGroupName] = useState(false);
-
 
   const loadContacts = () => {
     const contactsQuery = query(collection(db, 'contacts'), where('ownerId', '==', auth.currentUser.uid));
@@ -30,25 +30,28 @@ function NewGroup() {
     setShowSidebarContacts(true);
   };
 
-  const handleNameClick = (name) => {
+  const handleNameClick = (name, id) => {
     if (!selectedNames.includes(name)) {
       setSelectedNames([...selectedNames, name]);
+      setSelectedIds([...selectedIds, id]); 
     }
   };
 
-  const handleNameDelete = (name) => {
+  const handleNameDelete = (name, id) => {
     const updatedNames = selectedNames.filter((selectedName) => selectedName !== name);
     setSelectedNames(updatedNames);
+
+    const updatedIds = selectedIds.filter((selectedId) => selectedId !== id);
+    setSelectedIds(updatedIds); 
   };
 
   const toggleGroupName = () => {
     setShowGroupName(!showGroupName);
   };
 
-  if(showGroupName) {
-    return <CreateGroup />
+  if (showGroupName) {
+    return <CreateGroup selectedIds={selectedIds} />;
   }
-
 
   return (
     <div>
@@ -68,7 +71,7 @@ function NewGroup() {
             {selectedNames.map((name, index) => (
               <div key={index} className="col-12">
                 {name}{' '}
-                <button onClick={() => handleNameDelete(name)} >
+                <button onClick={() => handleNameDelete(name, selectedIds[index])} >
                   Delete
                 </button>
               </div>
@@ -93,7 +96,7 @@ function NewGroup() {
               onMouseOut={(e) => {
                 e.currentTarget.style.backgroundColor = '';
               }}
-              onClick={() => handleNameClick(contact.name)}
+              onClick={() => handleNameClick(contact.name, contact.uid)}
             >
               {contact.name}
             </div>

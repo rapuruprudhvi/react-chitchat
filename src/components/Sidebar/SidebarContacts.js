@@ -6,6 +6,7 @@ import Home from "./Home.js";
 import NewGroup from "./NewGroup.js";
 import AddContacts from "./AddContacts.js";
 
+
 const SidebarContacts = () => {
   const [contacts, setContacts] = useState([]);
   const [showHome, setShowHome] = useState(true);
