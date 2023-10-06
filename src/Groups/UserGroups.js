@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
-import CreateGroup from "./CreateGroup.js"
+import GroupChat from './GroupChats';
+
 import {
     addDoc,
     collection,
@@ -39,7 +40,7 @@ const UserGroups = () => {
         <div className="col-2"></div>
         <div className="col-10">
           {/* Content of the Home component */}
-          <CreateGroup></CreateGroup>
+          
           <div>
           <h2>Your Groups</h2>
           <ul>
@@ -49,6 +50,7 @@ const UserGroups = () => {
           </ul>
         </div>
         </div>
+        <GroupChat />
       </div>
     </div>
   );

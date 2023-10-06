@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SidebarContacts from './SidebarContacts';
+import UserGroups from '../../Groups/UserGroups';
 
 const Home = () => {
   const [showContacts, setShowContacts] = useState(false);
@@ -23,7 +24,7 @@ const Home = () => {
         </div>
         <div className="col-2"> </div>
       </div>
-    
+    <UserGroups />
     </>
   );
 };
