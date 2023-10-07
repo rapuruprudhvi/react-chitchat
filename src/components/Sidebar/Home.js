@@ -18,9 +18,9 @@ const Home = () => {
     <>
       {/* Left side bar buttons */}
       <div className="row" style={{ backgroundColor: '#d1d7db', position: 'sticky', top: "0", borderRight: '1px solid #ccc', marginRight: "0px", paddingTop: "10px", paddingBottom: "10px" }}>
-        <div className="col-6"></div>
+        <div className="col-8"></div>
         <div className="col-2">
-          <button onClick={toggleContacts}>Contacts</button>
+          <i class="bi bi-person-plus-fill" onClick={toggleContacts} style={{fontSize:"25px"}}></i>
         </div>
         <div className="col-2"> </div>
       </div>

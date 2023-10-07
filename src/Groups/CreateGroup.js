@@ -56,8 +56,13 @@ const CreateGroup = (props) => {
         value={groupName}
         onChange={(e) => setGroupName(e.target.value)}
       />
-      <button onClick={createGroup}>Create Group</button>
-    </div>
+        <div className="row">
+           <div className='col-4'></div>
+             <div className='col-8'>
+               <i class="bi bi-check-circle-fill" onClick={createGroup} style={{fontSize:"40px",color:"green"}}></i>
+            </div>
+        </div>
+     </div>
   );
 }
 

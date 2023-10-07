@@ -58,15 +58,15 @@ function GroupChat({ groupUid }) {
           </div>
         ))}
       </div>
-      <div className="message-input">
+      <div className="message-input"  style={{ backgroundColor: '#ccc',position: 'sticky',paddingTop:"10px",paddingBottom:"10px",top:"0"}}>
         <input
           type="text"
           placeholder="Type your message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <button onClick={sendMessage}>Send</button>
-      </div>
+        <i class="bi bi-send-fill" onClick={sendMessage} style={{fontSize:"20px",marginLeft:"10px",color:"green"}}></i>
+        </div>
     </div>
   );
 }

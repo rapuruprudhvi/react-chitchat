@@ -60,20 +60,16 @@ function NewGroup() {
       ) : (
         <div>
           <div className="row" style={{ backgroundColor: '#008069', position: 'sticky', top: '0', color: 'white', paddingTop: '50px', marginRight: '0px', paddingBottom: '10px' }}>
-            <div className="col-2">
-              <button className="bi bi-arrow-left" onClick={toggleComponent}>
-                back
-              </button>
+            <div className="col-1">
+              <i className="bi bi-arrow-left" onClick={toggleComponent} style={{fontSize:"25px"}} ></i>
             </div>
-            <h4 className="col-10">Add Group Participants</h4>
+            <h4 className="col-11">Add Group Participants</h4>
           </div>
           <div className="row">
             {selectedNames.map((name, index) => (
               <div key={index} className="col-12">
                 {name}{' '}
-                <button onClick={() => handleNameDelete(name, selectedIds[index])} >
-                  Delete
-                </button>
+                <i class="bi bi-x" onClick={() => handleNameDelete(name, selectedIds[index])}></i>
               </div>
             ))}
           </div>
@@ -107,7 +103,7 @@ function NewGroup() {
             <div className="row">
               <div className='col-4'></div>
               <div className='col-8'>
-                <button onClick={toggleGroupName}>Next</button>
+                <i class="bi bi-check-circle-fill" onClick={toggleGroupName} style={{fontSize:"40px",color:"green"}}></i>
               </div>
             </div>
           )}
