@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import SidebarContacts from './SidebarContacts';
 import UserGroups from '../../Groups/UserGroups';
+import SearchBox from './SearchBox';
 
-const Home = () => {
+const Home = (props) => {
   const [showContacts, setShowContacts] = useState(false);
 
   const toggleContacts = () => {
@@ -24,7 +25,8 @@ const Home = () => {
         </div>
         <div className="col-2"> </div>
       </div>
-    <UserGroups />
+      <SearchBox setActiveChartId={props.setActiveChartId} />
+      <UserGroups />
     </>
   );
 };

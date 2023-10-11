@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { auth } from "./firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import NavBar from "./NavBar";
@@ -14,15 +15,17 @@ import Chatbar from "./chatbar/Chatbar.js";
 const Layout = () => {
   // const [user] = useAuthState(auth);
 
+  const [activeChartId, setActiveChartId] = useState(null);
+
   return (
     <div className="container-fluid position-fixed">
       <div className="row">
         <div className="col-3">
-          <SideBar></SideBar>
+          <SideBar setActiveChartId={setActiveChartId}></SideBar>
         </div>
 
         <div className="col-9 p-0" >
-         <Chatbar />
+          <Chatbar activeChartId={activeChartId}/>
         </div>
       </div>
     </div>
