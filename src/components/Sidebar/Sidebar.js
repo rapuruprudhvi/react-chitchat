@@ -1,9 +1,9 @@
 import Home from './Home';
 import SidebarContacts from './SidebarContacts';
 
-const SideBar = () => {
+const SideBar = (props) => {
     return <>
-        <Home></Home>
+        <Home setActiveChartId={props.setActiveChartId}></Home>
         {/* <SidebarContacts></SidebarContacts> */}
     </>;
 };
