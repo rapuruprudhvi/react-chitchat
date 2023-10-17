@@ -16,7 +16,7 @@ const Welcome = () => {
       <p>Sign in with Google to chat with with your fellow React Developers.</p>
       <button className="sign-in">
         <p onClick={googleSignIn}>Sign in with google</p>
-       
+
       </button>
     </main>
   );

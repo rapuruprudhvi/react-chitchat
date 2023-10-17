@@ -15,11 +15,11 @@ const NavBar = () => {
   };
   return (
     <nav className="nav-bar">
-      
-      
+
+
       {user ? (
-         <i class="bi bi-box-arrow-right" onClick={signOut}   style={{fontSize:"25px"}} ></i>
-         
+         <i className="bi bi-box-arrow-right" onClick={signOut}   style={{fontSize:"25px"}} ></i>
+
       ) : (
         <button className="sign-in">
           <p
