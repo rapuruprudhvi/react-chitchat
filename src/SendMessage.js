@@ -15,10 +15,10 @@ const SendMessage = ({ sendMessage }) => {
         type="text"
         placeholder="Type your message..."
         value={messageText}
-        onChange={(e) => setMessageText(e.target.value)} 
+        onChange={(e) => setMessageText(e.target.value)}
         style={{paddingRight:"70%",marginLeft:"20px"}}
       />
-      <i class="bi bi-send-fill" onClick={handleSendMessage} style={{fontSize:"20px",marginLeft:"10px",color:"green"}}></i>
+      <i className="bi bi-send-fill" onClick={handleSendMessage} style={{fontSize:"20px",marginLeft:"10px",color:"green"}}></i>
     </div>
   );
 };

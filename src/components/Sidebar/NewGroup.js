@@ -8,7 +8,7 @@ function NewGroup() {
   const [contacts, setContacts] = useState([]);
   const [showSidebarContacts, setShowSidebarContacts] = useState(false);
   const [selectedNames, setSelectedNames] = useState([]);
-  const [selectedIds, setSelectedIds] = useState([]); 
+  const [selectedIds, setSelectedIds] = useState([]);
   const [showGroupName, setShowGroupName] = useState(false);
 
   const loadContacts = () => {
@@ -33,7 +33,7 @@ function NewGroup() {
   const handleNameClick = (name, id) => {
     if (!selectedNames.includes(name)) {
       setSelectedNames([...selectedNames, name]);
-      setSelectedIds([...selectedIds, id]); 
+      setSelectedIds([...selectedIds, id]);
     }
   };
 
@@ -42,7 +42,7 @@ function NewGroup() {
     setSelectedNames(updatedNames);
 
     const updatedIds = selectedIds.filter((selectedId) => selectedId !== id);
-    setSelectedIds(updatedIds); 
+    setSelectedIds(updatedIds);
   };
 
   const toggleGroupName = () => {
@@ -69,7 +69,7 @@ function NewGroup() {
             {selectedNames.map((name, index) => (
               <div key={index} className="col-12">
                 {name}{' '}
-                <i class="bi bi-x" onClick={() => handleNameDelete(name, selectedIds[index])}></i>
+                <i className="bi bi-x" onClick={() => handleNameDelete(name, selectedIds[index])}></i>
               </div>
             ))}
           </div>
@@ -97,13 +97,13 @@ function NewGroup() {
               {contact.name}
             </div>
           ))}
-          
+
           {/* Conditionally render the button if at least one name is selected */}
           {selectedNames.length > 0 && (
             <div className="row">
               <div className='col-4'></div>
               <div className='col-8'>
-                <i class="bi bi-check-circle-fill" onClick={toggleGroupName} style={{fontSize:"40px",color:"green"}}></i>
+                <i className="bi bi-check-circle-fill" onClick={toggleGroupName} style={{fontSize:"40px",color:"green"}}></i>
               </div>
             </div>
           )}

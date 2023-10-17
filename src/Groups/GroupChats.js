@@ -65,7 +65,7 @@ function GroupChat({ groupUid }) {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <i class="bi bi-send-fill" onClick={sendMessage} style={{fontSize:"20px",marginLeft:"10px",color:"green"}}></i>
+        <i className="bi bi-send-fill" onClick={sendMessage} style={{fontSize:"20px",marginLeft:"10px",color:"green"}}></i>
         </div>
     </div>
   );

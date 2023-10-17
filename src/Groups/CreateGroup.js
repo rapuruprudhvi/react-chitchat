@@ -25,7 +25,7 @@ const CreateGroup = (props) => {
     if (groupName.trim() !== '') {
       // Generate a random 28-character alphanumeric string for groupUid
       const groupUid = generateRandomString(28);
-      
+
       const groupDocRef = await addDoc(collection(db, "groups"), {
         groupUid, // Assign the generated groupUid
         name: groupName,
@@ -59,7 +59,7 @@ const CreateGroup = (props) => {
         <div className="row">
            <div className='col-4'></div>
              <div className='col-8'>
-               <i class="bi bi-check-circle-fill" onClick={createGroup} style={{fontSize:"40px",color:"green"}}></i>
+               <i className="bi bi-check-circle-fill" onClick={createGroup} style={{fontSize:"40px",color:"green"}}></i>
             </div>
         </div>
      </div>

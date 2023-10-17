@@ -6,16 +6,15 @@ const Message = ({ message }) => {
 
   return (
     <div
-      className={`chat-bubble ${message.uid === user.uid ? "right" : ""}`}>
+      className={`row chat-bubble ${message.uid === user.uid ? "right" : ""}`}>
       {/* <img
         className="chat-bubble__left"
         src={message.avatar}
         alt="user avatar"
       /> */}
-      
+
       <div className="chat-bubble__right">
-        <p className="user-name">{message.name}</p>
-        <p className="user-message">{message.text}</p>
+        <p className="user-name"><b>{message.senderName || message.senderId}:</b> {message.text}</p>
       </div>
     </div>
   );
