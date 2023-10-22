@@ -16,16 +16,17 @@ const Layout = () => {
   // const [user] = useAuthState(auth);
 
   const [activeChartId, setActiveChartId] = useState(null);
+  const [activeChartName,setActiveChartName]=useState(null);
 
   return (
     <div className="container-fluid position-fixed">
       <div className="row">
         <div className="col-3">
-          <SideBar setActiveChartId={setActiveChartId}></SideBar>
+          <SideBar setActiveChartId={setActiveChartId} setActiveChartName={setActiveChartName}></SideBar>
         </div>
 
         <div className="col-9 p-0" >
-          <Chatbar activeChartId={activeChartId}/>
+          <Chatbar activeChartId={activeChartId} activeChartName={activeChartName} setActiveChartName={setActiveChartName}/>
         </div>
       </div>
     </div>
