@@ -3,7 +3,7 @@ import SidebarContacts from './SidebarContacts';
 
 const SideBar = (props) => {
     return <>
-        <Home setActiveChartId={props.setActiveChartId}></Home>
+        <Home setActiveChartId={props.setActiveChartId} setActiveChartName={props.setActiveChartName}></Home>
         {/* <SidebarContacts></SidebarContacts> */}
     </>;
 };

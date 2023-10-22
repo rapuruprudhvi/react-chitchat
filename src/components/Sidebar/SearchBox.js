@@ -14,7 +14,7 @@ const SearchBox = (props) => {
 
   const searchByName = (inputString) => {
     // FIXME: Remove it
-    if(searchResults.length > 0){
+    if (searchResults.length > 0) {
       return;
     }
 
@@ -34,35 +34,32 @@ const SearchBox = (props) => {
     })
   }
 
-  const findOrCreateNewChat = (selectedContactUid) => {
+  const findOrCreateNewChat = (selectedContactUid, selectedUserName) => {
     const chatId = [auth.currentUser.uid, selectedContactUid].sort().join("_");
     console.log('chatId', chatId)
 
     const chatExistsQuery = query(collection(db, "chats"), where("chatId", "==", chatId));
     getDocs(chatExistsQuery).then((chatExistsSnapshot) => {
       if (chatExistsSnapshot.empty) {
-        const selectedUserQuery = query(collection(db, "users"), where("uid", "==", selectedContactUid));
-        getDocs(selectedUserQuery).then((selectedUserSnapshot) => {
-          console.log('selectedUserSnapshot.docs[0].data()', selectedUserSnapshot.docs[0].data())
-          const selectedUserName = selectedUserSnapshot.docs[0].data().name || 'Unkown';
-          addDoc(collection(db, "chats"), {
-            chatId: chatId,
-            type: "personal",
-            userIds: [auth.currentUser.uid, selectedContactUid],
-            userNames: [auth.currentUser.displayName, selectedUserName],
-            createdAt: serverTimestamp(),
-          }).then((chatDocRef) => {
-            props.setActiveChartId(chatDocRef.chatId);
-          });
+        addDoc(collection(db, "chats"), {
+          chatId: chatId,
+          type: "personal",
+          userIds: [auth.currentUser.uid, selectedContactUid],
+          userNames: [auth.currentUser.displayName, selectedUserName],
+          createdAt: serverTimestamp(),
+        }).then((chatDocRef) => {
+          props.setActiveChartId(chatDocRef.chatId);
+          props.setActiveChartName(selectedUserName); // Set the selected person's name
         });
       } else {
         props.setActiveChartId(chatId);
+        props.setActiveChartName(selectedUserName); // Set the selected person's name
       }
     })
   }
 
-  const activateChat = (selectedContactUid) => {
-    findOrCreateNewChat(selectedContactUid);
+  const activateChat = (selectedContactUid, selectedUserName) => {
+    findOrCreateNewChat(selectedContactUid, selectedUserName);
   }
 
   return (
@@ -71,11 +68,10 @@ const SearchBox = (props) => {
         <input type='text' placeholder='Search or start a new chat' onChange={(e) => searchByName(e.target.value)}></input>
       </div>
       {searchResults.map((contact) => (
-        <div className='row'>
-          <span key={contact.uid} onClick={(e) => activateChat(contact.uid)}>{contact.name}</span>
+        <div className='row' key={contact.uid}>
+          <span onClick={() => activateChat(contact.uid, contact.name)}>{contact.name}</span>
         </div>
       ))}
-
     </>
   );
 };

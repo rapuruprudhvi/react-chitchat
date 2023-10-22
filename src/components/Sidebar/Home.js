@@ -25,8 +25,8 @@ const Home = (props) => {
         </div>
         <div className="col-2"> </div>
       </div>
-      <SearchBox setActiveChartId={props.setActiveChartId} />
-      <ChatList setActiveChartId={props.setActiveChartId} />
+      <SearchBox setActiveChartId={props.setActiveChartId} setActiveChartName={props.setActiveChartName} />
+      <ChatList setActiveChartId={props.setActiveChartId} setActiveChartName={props.setActiveChartName} />
     </>
   );
 };
