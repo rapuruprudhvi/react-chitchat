@@ -13,25 +13,43 @@ const SearchBox = (props) => {
   const [searchResults, setSearchResults] = useState([]);
 
   const searchByName = (inputString) => {
-    // FIXME: Remove it
-    if (searchResults.length > 0) {
+    const sanitizedInput = inputString.trim().toLowerCase();
+
+    if (sanitizedInput === "") {
+      // If the search input is empty, do nothing
       return;
     }
 
-    const searchByNameQuery = query(collection(db, "contacts"), where("ownerId", "==", auth.currentUser.uid), where("name", "==", inputString));
-    getDocs(searchByNameQuery)
-    .then((searchByNameSnapshot) => {
-      console.log(searchByNameSnapshot)
-      if (searchByNameSnapshot.empty) {
-        const allContactsQuery = query(collection(db, "contacts"), where("ownerId", "==", auth.currentUser.uid));
-        getDocs(allContactsQuery)
-        .then((allContactsSnapshot) => {
-          setSearchResults(allContactsSnapshot.docs.map((doc) => doc.data()));
+    const contactsAndGroupsQuery = query(
+      collection(db, "contacts"),
+      where("ownerId", "==", auth.currentUser.uid),
+      where("name", "==", inputString)
+    );
+
+    getDocs(contactsAndGroupsQuery).then((snapshot) => {
+      const results = [];
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        results.push({ type: "contact", ...data });
+      });
+
+      // You can also query and include groups
+      const groupsQuery = query(
+        collection(db, "groups"),
+        where("adminUid", "==", auth.currentUser.uid),
+        where("name", "==", inputString)
+      );
+
+      getDocs(groupsQuery).then((groupSnapshot) => {
+        groupSnapshot.forEach((doc) => {
+          const data = doc.data();
+          results.push({ type: "group", ...data });
         });
-      } else {
-        setSearchResults(searchByNameSnapshot.docs.map((doc) => doc.data()));
-      }
-    })
+
+        setSearchResults(results);
+      });
+    });
   }
 
   const findOrCreateNewChat = (selectedContactUid, selectedUserName) => {
