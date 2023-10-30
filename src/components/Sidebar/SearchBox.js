@@ -52,10 +52,10 @@ const SearchBox = (props) => {
     });
   }
 
-  const findOrCreateNewChat = (selectedContactUid, selectedUserName) => {
+  const findOrCreateNewChat = (selectedContactUid, selectedUserName, selectedUserAvatar) => {
     const chatId = [auth.currentUser.uid, selectedContactUid].sort().join("_");
     console.log('chatId', chatId)
-
+debugger
     const chatExistsQuery = query(collection(db, "chats"), where("chatId", "==", chatId));
     getDocs(chatExistsQuery).then((chatExistsSnapshot) => {
       if (chatExistsSnapshot.empty) {
@@ -64,20 +64,23 @@ const SearchBox = (props) => {
           type: "personal",
           userIds: [auth.currentUser.uid, selectedContactUid],
           userNames: [auth.currentUser.displayName, selectedUserName],
+          userAvatars: [auth.currentUser.photoURL, selectedUserAvatar],
           createdAt: serverTimestamp(),
         }).then((chatDocRef) => {
           props.setActiveChartId(chatDocRef.chatId);
-          props.setActiveChartName(selectedUserName); // Set the selected person's name
+          props.setActiveChartName(selectedUserName);
+          props.setActiveChartAvatar(selectedUserAvatar); // Set the selected person's avatar
         });
       } else {
         props.setActiveChartId(chatId);
-        props.setActiveChartName(selectedUserName); // Set the selected person's name
+        props.setActiveChartName(selectedUserName);
+        props.setActiveChartAvatar(selectedUserAvatar); // Set the selected person's avatar
       }
     })
   }
 
-  const activateChat = (selectedContactUid, selectedUserName) => {
-    findOrCreateNewChat(selectedContactUid, selectedUserName);
+  const activateChat = (selectedContactUid, selectedUserName, selectedUserAvatar) => {
+    findOrCreateNewChat(selectedContactUid, selectedUserName, selectedUserAvatar);
   }
 
   return (
@@ -87,7 +90,9 @@ const SearchBox = (props) => {
       </div>
       {searchResults.map((contact) => (
         <div className='row' key={contact.uid}>
-          <span onClick={() => activateChat(contact.uid, contact.name)}>{contact.name}</span>
+          <span onClick={() => activateChat(contact.uid, contact.name, contact.avatar)}>
+            {contact.name}
+          </span>
         </div>
       ))}
     </>
