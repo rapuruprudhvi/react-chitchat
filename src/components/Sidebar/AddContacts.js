@@ -10,7 +10,6 @@ import {
 } from "firebase/firestore";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 const AddContacts = () => {
   const [name, setName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
@@ -40,7 +39,9 @@ const AddContacts = () => {
         alert("User with provided email does not exist!");
         return;
       }
-      const contactUid = userExistsSnapshot.docs[0].data().uid;
+      const user = userExistsSnapshot.docs[0].data();
+      const contactUid = user.uid;
+      const contactAvatar = user.avatar; // Assuming you have an "avatar" field in your "users" collection.
 
       const contactExistsQuery = query(collection(db, "contacts"), where("ownerId", "==", uid), where("email", "==", contactEmail));
       getDocs(contactExistsQuery)
@@ -54,6 +55,7 @@ const AddContacts = () => {
           uid: contactUid,
           email: contactEmail,
           name: name,
+          avatar: contactAvatar, // Add the avatar field to the contact document.
           createdAt: serverTimestamp(),
           ownerId: uid,
         });
@@ -64,7 +66,6 @@ const AddContacts = () => {
         setContactEmail("");
       });
     });
-
   };
 
   return (
