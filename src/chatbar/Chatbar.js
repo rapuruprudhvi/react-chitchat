@@ -23,11 +23,17 @@ const Chatbar = (props) => {
       if (!chatExistsSnapshot.empty) {
         const chatDocRef = chatExistsSnapshot.docs.map((doc) => doc.data())[0];
         const userNames = chatDocRef.userNames;
+        const userAvatars = chatDocRef.userAvatars;
         const index = userNames.indexOf(auth.currentUser.displayName);
+        
+
         if (index > -1) {
           userNames.splice(index, 1);
+          userAvatars.splice(index, 1);
         }
         props.setActiveChartName(userNames[0]);
+        props.setActiveChartAvatar(userAvatars[0]);
+
       }
     });
   };
@@ -55,9 +61,13 @@ const Chatbar = (props) => {
   return (
     <div>
       <div className="row" style={{ backgroundColor: '#d1d7db', position: 'sticky', top: "0", paddingTop: "10px", paddingBottom: "10px" }}>
-      <div className="col-1" >
-         <img src={props.activeChartName} alt="Profile"  style={{ width: '40px', height: '40px', borderRadius: '50%' }}></img></div>
-        <div className="col-9" style={{ borderLeft: '1px solid light' }}>{props.activeChartName}</div>
+      <div className="col-1" style={{paddingLeft:'25px'}} >
+         <img src={props.activeChartAvatar} alt="Profile" 
+              style={{ width: '40px', height: '40px', borderRadius: '50%' }}></img></div>
+        
+        
+        
+        <div className="col-9" style={{ borderLeft: '1px solid light',paddingLeft:'0px',paddingTop:'5px',fontSize:'20px' }}>{props.activeChartName}</div>
         <div className="col-1"><i className="bi bi-search" style={{ fontSize: "25px" }}></i></div>
         <div className="col-1"><NavBar></NavBar></div>
       </div>

@@ -32,8 +32,8 @@ const Home = (props) => {
            <i class="bi bi-three-dots-vertical" style={{fontSize:"20px"}}></i>
          </div>
       </div>
-      <SearchBox setActiveChartId={props.setActiveChartId} setActiveChartName={props.setActiveChartName} setActiveChartAvater={props.setActiveChartAvater} />
-      <ChatList setActiveChartId={props.setActiveChartId} setActiveChartName={props.setActiveChartName} setActiveChartAvater={props.setActiveChartAvater} />
+      <SearchBox setActiveChartId={props.setActiveChartId} setActiveChartName={props.setActiveChartName} setActiveChartAvatar={props.setActiveChartAvatar} />
+      <ChatList setActiveChartId={props.setActiveChartId} setActiveChartName={props.setActiveChartName} setActiveChartAvatar={props.setActiveChartAvatar} />
     </>
   );
 };
