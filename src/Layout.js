@@ -17,18 +17,18 @@ const Layout = () => {
 
   const [activeChartId, setActiveChartId] = useState(null);
   const [activeChartName,setActiveChartName]=useState(null);
-  const [activeChartAvater,setActiveChartAvater]=useState(null);
+  const [activeChartAvatar,setActiveChartAvatar]=useState(null);
 
 
   return (
     <div className="container-fluid position-fixed">
       <div className="row">
         <div className="col-3">
-          <SideBar setActiveChartId={setActiveChartId} setActiveChartName={setActiveChartName} setActiveChartAvater={setActiveChartAvater}></SideBar>
+          <SideBar setActiveChartId={setActiveChartId} setActiveChartName={setActiveChartName} setActiveChartAvatar={setActiveChartAvatar}></SideBar>
         </div>
 
         <div className="col-9 p-0" >
-          <Chatbar activeChartId={activeChartId} activeChartName={activeChartName} activeChartAvater={activeChartAvater} setActiveChartName={setActiveChartName}/>
+          <Chatbar activeChartId={activeChartId} activeChartName={activeChartName} activeChartAvatar={activeChartAvatar} setActiveChartName={setActiveChartName} setActiveChartAvatar={setActiveChartAvatar}/>
         </div>
       </div>
     </div>

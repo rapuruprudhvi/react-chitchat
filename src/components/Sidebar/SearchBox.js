@@ -55,7 +55,6 @@ const SearchBox = (props) => {
   const findOrCreateNewChat = (selectedContactUid, selectedUserName, selectedUserAvatar) => {
     const chatId = [auth.currentUser.uid, selectedContactUid].sort().join("_");
     console.log('chatId', chatId)
-debugger
     const chatExistsQuery = query(collection(db, "chats"), where("chatId", "==", chatId));
     getDocs(chatExistsQuery).then((chatExistsSnapshot) => {
       if (chatExistsSnapshot.empty) {
